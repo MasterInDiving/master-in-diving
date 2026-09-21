@@ -1,8 +1,10 @@
 /**
  * Site-wide constants: canonical origin and social profiles.
  *
- * A social link set to `null` is not rendered anywhere. Facebook stays `null`
- * until a permanent profile URL is provided — a share link is not one.
+ * A social link set to `null` is not rendered anywhere.
+ *
+ * Both entries are permanent profile URLs. A /share/ link is not one: it is a
+ * tracking redirect, so it does not belong here even though it resolves.
  */
 
 export const LOCALES = ['ru', 'uk', 'en'] as const;
@@ -27,8 +29,8 @@ export const SITE_URL = (
 
 export const SOCIAL = {
   instagram: 'https://www.instagram.com/master_in_diving',
-  /** Pending a permanent profile URL. Hidden while null. */
-  facebook: null as string | null,
+  /** Old username on a profile that displays as Константин Донец. */
+  facebook: 'https://www.facebook.com/kostya.lebedev.7' as string | null,
 } as const;
 
 /** OpenGraph locale codes, keyed by site locale. */

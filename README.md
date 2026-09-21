@@ -180,13 +180,19 @@ Nothing else on the site depends on a network call, at build time or after.
 ```ts
 export const SOCIAL = {
   instagram: 'https://www.instagram.com/master_in_diving',
-  facebook: null,
+  facebook: 'https://www.facebook.com/kostya.lebedev.7',
 };
 ```
 
-Facebook is `null`, so no Facebook icon is rendered anywhere. Set it to a
-permanent profile URL (Profile → Copy link, not a share link) and the icon
-appears in the footer.
+Both icons appear in the footer. Setting either to `null` removes that icon
+everywhere, with no gap left behind.
+
+Use permanent profile URLs only. A `facebook.com/share/…` link is a tracking
+redirect, not an address: it carries a session-specific id and query
+parameters, and it is not what the profile is reachable at. Open the profile
+and use Copy link instead. The handle above reads `kostya.lebedev.7` — an old
+username on a profile that displays as Константин Донец — which is correct and
+should not be "fixed".
 
 ---
 
