@@ -26,6 +26,7 @@ then their browser languages, then falls back to Russian, and redirects to
 | `npm start` | Serves the production build |
 | `npm run typecheck` | TypeScript, no emit |
 | `npm run images` | Regenerates photos and QR codes from `source-photos/` |
+| `npm run fonts` | Re-cuts the handwriting font (only after editing that one line) |
 
 ---
 
@@ -150,6 +151,25 @@ the muted-audio badge in the story photo's bottom-right. If you replace a
 screenshot with a clean original, set that photo's `trim` values to `0`.
 
 Alt text is part of the translations, under `a11y` in each content file.
+
+---
+
+## The handwriting font
+
+One line on the page is handwritten: the phrase over the hero photo
+(`hero.handwritten` in each content file). It uses Caveat, cut down to just the
+characters those three phrases contain and committed as
+`public/fonts/caveat-subset.woff2` — 14 KiB instead of the 94 KiB Google's full
+latin + cyrillic subsets would cost on every visit.
+
+If you change that phrase in any language, re-cut the font:
+
+```bash
+npm run fonts
+```
+
+The script fetches Caveat from Google once, subsets it, and writes the file.
+Nothing else on the site depends on a network call, at build time or after.
 
 ---
 
