@@ -16,14 +16,14 @@ export interface Photo {
 
 export const HERO_PHOTO: Photo = {
   name: 'hero',
-  widths: [546, 820, 1092],
+  widths: [546, 760, 1092],
   width: 1092,
   height: 1236,
 };
 
 export const STORY_PHOTO: Photo = {
   name: 'story',
-  widths: [440, 660, 1024],
+  widths: [440, 760, 1024],
   width: 1284,
   height: 1536,
 };

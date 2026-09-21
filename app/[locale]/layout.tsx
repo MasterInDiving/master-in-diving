@@ -1,23 +1,18 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { Caveat, Inter } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { LOCALES, OG_LOCALE, SITE_URL, isLocale, type Locale } from '@/config/site';
 import { OG_IMAGE } from '@/config/photos';
 import { getContent } from '@/content';
 import '../globals.css';
 
-// Cyrillic subsets are required for the Russian and Ukrainian versions.
+// Only latin and cyrillic: latin-ext is unused by all three languages, and
+// Ukrainian's і ї є ґ all sit inside the basic cyrillic range, so cyrillic-ext
+// would be ~50 KiB of glyphs this site never renders.
 const inter = Inter({
-  subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
+  subsets: ['latin', 'cyrillic'],
   display: 'swap',
   variable: '--font-inter',
-});
-
-const caveat = Caveat({
-  subsets: ['latin', 'cyrillic'],
-  weight: ['500'],
-  display: 'swap',
-  variable: '--font-caveat',
 });
 
 export const dynamicParams = false;
@@ -87,15 +82,15 @@ export default async function LocaleLayout({
   const content = getContent(locale as Locale);
 
   return (
-    <html lang={locale} className={`${inter.variable} ${caveat.variable}`}>
+    <html lang={locale} className={inter.variable}>
       <head>
         {/* The hero is the largest contentful paint; start it with the HTML. */}
         <link
           rel="preload"
           as="image"
-          href="/photos/hero-820.avif"
+          href="/photos/hero-760.avif"
           type="image/avif"
-          imageSrcSet="/photos/hero-546.avif 546w, /photos/hero-820.avif 820w, /photos/hero-1092.avif 1092w"
+          imageSrcSet="/photos/hero-546.avif 546w, /photos/hero-760.avif 760w, /photos/hero-1092.avif 1092w"
           imageSizes="(min-width: 1024px) 50vw, 100vw"
           fetchPriority="high"
         />

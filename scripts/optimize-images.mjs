@@ -32,13 +32,13 @@ const SOURCES = [
     name: 'hero',
     file: 'kostya-hero.jpg',
     trim: { top: 44, bottom: 0 },
-    widths: [546, 820, 1092],
+    widths: [546, 760, 1092],
   },
   {
     name: 'story',
     file: 'kostya-story.jpg',
     trim: { top: 0, bottom: 64 },
-    widths: [440, 660, 1024],
+    widths: [440, 760, 1024],
   },
 ];
 

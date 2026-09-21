@@ -6,6 +6,12 @@ interface PhotoProps {
   /** Matches the CSS width of the rendered image at each breakpoint. */
   sizes: string;
   priority?: boolean;
+  /**
+   * Source order. AVIF is the smallest but the slowest to decode, which shows
+   * up as render delay on the largest contentful paint — so the hero asks for
+   * WebP first and leaves AVIF to the images below the fold.
+   */
+  formats?: ('avif' | 'webp')[];
   className?: string;
 }
 
@@ -19,6 +25,7 @@ export function ResponsivePhoto({
   alt,
   sizes,
   priority = false,
+  formats = ['avif', 'webp'],
   className,
 }: PhotoProps) {
   const srcSet = (ext: string) =>
@@ -28,8 +35,14 @@ export function ResponsivePhoto({
 
   return (
     <picture>
-      <source type="image/avif" srcSet={srcSet('avif')} sizes={sizes} />
-      <source type="image/webp" srcSet={srcSet('webp')} sizes={sizes} />
+      {formats.map((format) => (
+        <source
+          key={format}
+          type={`image/${format}`}
+          srcSet={srcSet(format)}
+          sizes={sizes}
+        />
+      ))}
       <img
         src={`/photos/${photo.name}-${fallbackWidth}.jpg`}
         srcSet={srcSet('jpg')}
