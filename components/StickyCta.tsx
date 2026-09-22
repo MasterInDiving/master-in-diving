@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { HeartIcon } from './icons';
 
 /**
  * Small mobile-only bar (section 33). It appears once the hero has scrolled
@@ -49,7 +48,6 @@ export function StickyCta({ label }: { label: string }) {
           tabIndex={visible ? undefined : -1}
           className="inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-md bg-khaki px-6 text-white"
         >
-          <HeartIcon className="size-5" />
           {label}
         </a>
       </div>
