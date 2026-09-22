@@ -39,12 +39,7 @@ export function Footer({ content }: { content: SiteContent }) {
           </span>
         </div>
 
-        <p className="flex items-center gap-2 text-small text-muted">
-          {content.footer.thanks}
-          <span aria-hidden="true" className="text-khaki-soft">
-            ♡
-          </span>
-        </p>
+        <p className="text-small text-muted">{content.footer.thanks}</p>
       </div>
     </footer>
   );
