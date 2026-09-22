@@ -1,7 +1,7 @@
 import { HERO_PHOTO } from '@/config/photos';
 import type { SiteContent } from '@/content/types';
 import { ResponsivePhoto } from './Photo';
-import { ArrowRightIcon, HeartIcon } from './icons';
+import { ArrowRightIcon } from './icons';
 
 export function Hero({ content }: { content: SiteContent }) {
   const { hero } = content;
@@ -15,14 +15,7 @@ export function Hero({ content }: { content: SiteContent }) {
               {hero.eyebrow}
             </p>
 
-            <h1 className="mt-5 text-hero font-semibold">{hero.title}</h1>
-
-            <p className="mt-4 text-[1.0625rem] text-ink sm:text-[1.1875rem]">
-              <strong className="font-semibold text-khaki">
-                {hero.subtitleBrand}
-              </strong>
-              {hero.subtitleRest}
-            </p>
+            <h1 className="sr-only">{hero.title}</h1>
 
             <div className="mt-5 max-w-prose space-y-3.5 text-muted">
               {hero.paragraphs.map((paragraph) => (
@@ -35,7 +28,6 @@ export function Hero({ content }: { content: SiteContent }) {
                 href="#support"
                 className="inline-flex min-h-12 items-center gap-2.5 rounded-md bg-khaki px-7 text-white transition-colors duration-200 hover:bg-khaki-soft"
               >
-                <HeartIcon className="size-5" />
                 {hero.cta}
               </a>
               <a
@@ -62,7 +54,6 @@ export function Hero({ content }: { content: SiteContent }) {
             className="pointer-events-none absolute top-[18%] right-5 max-w-[9rem] text-right font-hand text-[1.75rem] leading-tight text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.45)] sm:right-8 sm:text-[2.125rem] lg:top-[26%]"
           >
             {hero.handwritten}
-            <span className="mt-1 block text-[1.5rem] sm:text-[1.75rem]">♡</span>
           </p>
         </div>
       </div>
