@@ -21,6 +21,7 @@ export const en: SiteContent = {
   nav: {
     home: 'Home',
     story: 'About me',
+    creations: 'Art',
     support: 'Support',
     updates: 'Updates',
     faq: 'FAQ',
@@ -76,6 +77,13 @@ export const en: SiteContent = {
       'Thank you for stopping by. I hope my blog has been useful or interesting for you in some way, or at least made you look at something differently.',
     ],
   },
+  creations: {
+    title: 'My art',
+    empty: 'Paintings will appear here soon — photo, price and status.',
+    soldLabel: 'Sold',
+    availableLabel: 'Available',
+    contactCta: 'Ask about this piece',
+  },
   donate: {
     title: 'How to support',
     subtitle: 'Pick whichever way suits you. Any support matters.',
@@ -89,14 +97,15 @@ export const en: SiteContent = {
       },
       paypal: {
         title: 'PayPal',
-        note: 'Kostya’s PayPal is linked to his phone number:',
-        copy: 'Copy number',
+        note: 'Kostya’s PayPal is linked to his email:',
+        copy: 'Copy email',
         copied: 'Copied',
-        copyFallback: 'Select the number and copy it manually',
+        copyFallback: 'Select the email and copy it manually',
       },
       crypto: {
         title: 'Cryptocurrency',
         reveal: 'Show address',
+        networkLabel: 'Network',
         copy: 'Copy address',
         copied: 'Copied',
         copyFallback: 'Select the address and copy it manually',

@@ -1,4 +1,5 @@
 import type { PaymentMethodId } from '@/config/payments';
+import type { Locale } from '@/config/site';
 
 export interface FaqItem {
   q: string;
@@ -15,12 +16,29 @@ export interface PaymentCopy {
   title: string;
   /** Optional line above the value. Omitted when absent. */
   note?: string;
+  /** Localised label shown before `PaymentMethod.network`, e.g. "Сеть". */
+  networkLabel?: string;
   /** Label of the reveal button. Omitted when the value is shown outright. */
   reveal?: string;
   copy: string;
   copied: string;
   /** Shown instead of the copy button when the clipboard API is unavailable. */
   copyFallback: string;
+  /** Optional link shown under the value, e.g. "How to send crypto". */
+  linkUrl?: string;
+  linkLabel?: string;
+}
+
+export interface CreationItem {
+  /** Stable key; also used to derive nothing else — free-form. */
+  id: string;
+  /** Path under public/, e.g. "/creations/painting-1.jpg". No build step needed. */
+  photo: string;
+  alt: Record<Locale, string>;
+  title: Record<Locale, string>;
+  price: number;
+  currency: string;
+  status: 'available' | 'sold';
 }
 
 export interface SiteContent {
@@ -42,6 +60,7 @@ export interface SiteContent {
   nav: {
     home: string;
     story: string;
+    creations: string;
     support: string;
     updates: string;
     faq: string;
@@ -68,6 +87,15 @@ export interface SiteContent {
   story: {
     title: string;
     paragraphs: string[];
+  };
+  creations: {
+    title: string;
+    /** Shown instead of the grid while CREATIONS in content/creations.ts is empty. */
+    empty: string;
+    soldLabel: string;
+    availableLabel: string;
+    /** Link label under an available piece, e.g. "Ask about this piece". */
+    contactCta: string;
   };
   donate: {
     title: string;
