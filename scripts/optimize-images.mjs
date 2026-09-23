@@ -31,7 +31,7 @@ const SOURCES = [
   {
     name: 'hero',
     file: 'kostya-hero.jpg',
-    trim: { top: 44, bottom: 0 },
+    trim: { top: 0, bottom: 0 },
     widths: [546, 760, 1092],
   },
   {
@@ -78,7 +78,10 @@ async function build() {
         .rotate()
         .extract({ left: 0, top: source.trim.top, width: meta.width, height });
 
-    const widths = source.widths.filter((w) => w <= meta.width);
+    // Slight upscaling of the largest configured breakpoint is fine when a
+    // source photo is a little smaller than it (e.g. a phone export capped
+    // below 1080px); only drop a width if it would upscale by more than 25%.
+    const widths = source.widths.filter((w) => w <= meta.width * 1.25);
     for (const width of widths) {
       for (const format of FORMATS) {
         const file = `${source.name}-${width}.${format.ext}`;
