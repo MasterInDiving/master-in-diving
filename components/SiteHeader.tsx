@@ -16,6 +16,7 @@ export function SiteHeader({ locale, content, hasUpdates }: SiteHeaderProps) {
   const items = [
     { id: 'top', label: content.nav.home },
     { id: 'story', label: content.nav.story },
+    { id: 'creations', label: content.nav.creations },
     { id: 'support', label: content.nav.support },
     ...(hasUpdates ? [{ id: 'updates', label: content.nav.updates }] : []),
     { id: 'faq', label: content.nav.faq },

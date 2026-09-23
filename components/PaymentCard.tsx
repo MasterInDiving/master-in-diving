@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { PaymentMethod } from '@/config/payments';
 import type { PaymentCopy } from '@/content/types';
-import { CheckIcon, CopyIcon, EyeIcon } from './icons';
+import { CheckIcon, CopyIcon, ExternalLinkIcon, EyeIcon } from './icons';
 
 interface PaymentCardProps {
   method: PaymentMethod;
@@ -65,6 +65,12 @@ export function PaymentCard({ method, copy, qrAlt, icon }: PaymentCardProps) {
 
       {copy.note && <p className="mt-4 text-small text-muted">{copy.note}</p>}
 
+      {method.network && copy.networkLabel && (
+        <p className="mt-1 text-small text-muted">
+          {copy.networkLabel}: <span className="text-ink">{method.network}</span>
+        </p>
+      )}
+
       <p
         className={`mt-3 font-mono text-[0.8125rem] break-all text-ink xs:text-[0.9375rem] ${
           revealed ? 'select-all' : ''
@@ -82,6 +88,18 @@ export function PaymentCard({ method, copy, qrAlt, icon }: PaymentCardProps) {
           loading="lazy"
           className="mt-4 size-33 rounded-md border border-line bg-white p-1.5"
         />
+      )}
+
+      {copy.linkUrl && copy.linkLabel && (
+        <a
+          href={copy.linkUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex w-fit items-center gap-1.5 text-small text-khaki underline decoration-line underline-offset-4 transition-colors duration-200 hover:decoration-khaki"
+        >
+          {copy.linkLabel}
+          <ExternalLinkIcon className="size-3.5" />
+        </a>
       )}
 
       <div className="mt-auto pt-5">

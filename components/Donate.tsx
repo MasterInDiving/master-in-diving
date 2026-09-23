@@ -2,11 +2,11 @@ import { PAYMENT_METHODS, type PaymentMethodId } from '@/config/payments';
 import { SOCIAL } from '@/config/site';
 import type { SiteContent } from '@/content/types';
 import { PaymentCard } from './PaymentCard';
-import { CardIcon, CoinIcon, ExternalLinkIcon, PhoneIcon } from './icons';
+import { CardIcon, CoinIcon, ExternalLinkIcon, MailIcon } from './icons';
 
 const ICONS: Record<PaymentMethodId, React.ReactNode> = {
   monobank: <CardIcon className="size-5" />,
-  paypal: <PhoneIcon className="size-5" />,
+  paypal: <MailIcon className="size-5" />,
   crypto: <CoinIcon className="size-5" />,
 };
 

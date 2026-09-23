@@ -119,6 +119,13 @@ export const CardIcon = (props: IconProps) => (
   </Icon>
 );
 
+export const MailIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <rect x="2.8" y="5.2" width="18.4" height="13.6" rx="2.4" />
+    <path d="M3.4 6.4 12 12.8l8.6-6.4" />
+  </Icon>
+);
+
 export const PhoneIcon = (props: IconProps) => (
   <Icon {...props}>
     <rect x="6.6" y="2.6" width="10.8" height="18.8" rx="2.6" />
