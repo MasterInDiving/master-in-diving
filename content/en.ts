@@ -20,23 +20,25 @@ export const en: SiteContent = {
   },
   nav: {
     home: 'Home',
-    story: 'Story',
+    story: 'About me',
     support: 'Support',
     updates: 'Updates',
     faq: 'FAQ',
   },
   hero: {
-    eyebrow: 'Same dreams. Just a different route.',
+    eyebrow: 'Everything depends on our perception.',
     title: 'I’m Kostya',
     subtitleBrand: 'Master in Diving',
     subtitleRest: ' — my self-deprecating nickname.',
     paragraphs: [
-      'After the neck injury I got jumping into water, my life changed completely. I use a wheelchair now, I keep going with rehabilitation, I’m learning to live in a new way, and I try to find something to enjoy in every day.',
-      'This page exists so people can support me along that road — simply and transparently.',
+      'My life changed completely after the injury.',
+      'But I’m not giving up — I keep going with rehabilitation, learning to live in a new way, and trying to find joy in every day.',
+      'In nine years I’ve realized that recovery isn’t some short path from point A to point B. It’s constant work on yourself that takes time, energy, and, of course, money.',
+      'This page exists for anyone who wants to support me on this path.',
+      'Here you can learn more about me and, if you have the wish and the means, offer me financial support.',
     ],
     cta: 'Support',
-    storyLink: 'My story',
-    handwritten: 'Life goes on',
+    storyLink: 'About me',
   },
   goal: {
     label: 'Current goal',
@@ -62,17 +64,17 @@ export const en: SiteContent = {
     ],
   },
   story: {
-    title: 'My story',
+    title: 'About me',
     paragraphs: [
-      'My name is Kostya. I’m 35, and for nine years now I’ve been living with the aftermath of my one “virtuoso” jump into the water.',
-      'I was 26. I jumped at a spot I knew well, where I’d done it many times before. The water was deep enough, the height was about half a metre. But that particular jump ended in a severe cervical spine injury.',
-      'A lot of things had to be relearned from scratch. I use a wheelchair, my hands don’t work fully, and some completely ordinary things take time, help, or dozens of attempts.',
-      'Over these years I’ve learned patience. Not the elegant kind from motivational quotes — the ordinary kind, the one you get when there is simply no other option.',
-      'I keep working on rehabilitation: on movement, on strength, on independence. Sometimes the result looks like nothing at all from the outside. But I know how many repetitions are behind it.',
-      'I’m not waiting for a magic button. What matters to me is real change — even small change.',
+      'Hi, I’m Kostya.',
+      'In August 2017 I broke my neck after a bad dive into the water. Since the injury I’ve been paralyzed below the chest, and for nine years now I’ve been living with all its consequences, still learning to live by new rules.',
+      'From the very start I had to relearn the most ordinary things, go through rehabilitation, get used to my limitations, and gradually find ways to do what at first seemed impossible.',
+      'But my life is far from just the injury and rehabilitation. On my blog I talk about books, show my drawings, share the conclusions I’ve drawn from my own experience, and simply talk about my life as it is.',
+      'I try to approach everything with self-irony. Humor is a big part of what helps me get through hard situations and show on the blog that things aren’t so bad.',
+      'One of the main reasons I started the blog in the first place was pretty simple: to show as many people as possible that life can stay interesting even when it looks nothing like the one you once planned.',
+      'I’m not trying to motivate anyone in the usual sense of the word. I’m drawn far more to contrasts than to lofty phrases. Sometimes it’s exactly those contrasts that make you look at your own life a little differently.',
+      'Thank you for stopping by. I hope my blog has been useful or interesting for you in some way, or at least made you look at something differently.',
     ],
-    quote: 'Perfect technique isn’t always what matters — sometimes the movement itself matters more.',
-    quoteAuthor: 'Kostya',
   },
   donate: {
     title: 'How to support',
@@ -113,7 +115,7 @@ export const en: SiteContent = {
     items: [
       {
         q: 'Why do you call yourself Master in Diving?',
-        a: 'Because nine years ago I performed my most virtuoso jump into water and broke my neck. I’d never been a diver before, so apparently I started my career straight at maximum difficulty. Over time Master in Diving just became my self-deprecating nickname.',
+        a: 'Self-irony. This nickname came about on its own. It’s there to show people I’m okay. I can joke about what happened to me, and no one needs to pick their words carefully around me or worry about saying the wrong thing.',
       },
       {
         q: 'What exactly happened to you?',
@@ -121,27 +123,27 @@ export const en: SiteContent = {
       },
       {
         q: 'How does the injury affect your life now?',
-        a: 'I use a wheelchair, and my hands don’t work fully either. Some things take time, help, or special equipment. But I’ve learned a great deal over these years, and I keep getting more independent.',
+        a: 'Despite everything I’ve already achieved, I still need constant care. When your hands don’t fully work, and your fingers don’t work at all, a lot of things simply become unavailable. A lot. And so that I can live, not just get by, the people around me do everything they can every single day. But there’s still plenty I can’t access. And, as trite as it sounds, it very often comes down to money.',
       },
       {
         q: 'Is there any progress after nine years?',
-        a: 'Yes. It just doesn’t always look impressive from the outside. Hundreds of repetitions can sit behind one small movement. So I learned to value small results a long time ago.',
+        a: 'Yes. It just doesn’t always look impressive from the outside. But the people who’ve known me since the first days after the injury understand how big this progress is and how much work went into it. From the very first days, the fight was never about walking — it was about independence. When you can’t eat, brush your teeth, or even scratch an itch on your own, your legs are the last thing on your mind. And my fight for independence is still going on.',
       },
       {
         q: 'Are you still doing rehabilitation?',
-        a: 'Yes. Rehabilitation became part of my life a long time ago. I keep working on strength, movement, endurance, and anything that can give me a little more independence.',
+        a: 'Rehabilitation has long been part of my life. I keep working on strength, movement, and endurance, and on anything that can give me a bit more independence. But rehabilitation at home and proper, supervised rehabilitation are two different things. And going somewhere for proper rehabilitation on a regular basis simply isn’t possible for me. It’s not a matter of not wanting to…',
       },
       {
         q: 'Why do you want another course of rehabilitation?',
-        a: 'Because I still see things worth working on. I’m not waiting for a magic button that has me up and running tomorrow. What matters to me is real improvement in quality of life.',
+        a: 'Because there’s still a lot to work on. And to work on it with people who know what they’re doing. I’m not waiting for some magic button that has me up and running tomorrow. I want to improve my quality of life. There’s still a very long way to go before we can seriously talk about working on walking.',
       },
       {
-        q: 'What do the donations go towards?',
-        a: 'Rehabilitation first of all. The money may also go towards adaptive equipment, transport, supplies, and other costs tied to my everyday life.',
+        q: 'What does the support go towards?',
+        a: 'Rehabilitation first of all. The money can also go towards adaptive equipment, medication, and supplies tied to my everyday life. I also have one more dream — a specialized vehicle. But that one’s a bit of a stretch 🙂',
       },
       {
         q: 'What happens if more money comes in than the current rehabilitation needs?',
-        a: 'It will go towards further rehabilitation, equipment, and everyday living costs. I’ll share anything significant in the updates.',
+        a: 'If more comes in than the current rehabilitation needs, it will automatically go towards further rehabilitation, because even with rehabilitation every single day, there’s still a very long way to go. But I’ll definitely share anything important on my blog.',
       },
       {
         q: 'Will there be reports and updates?',
