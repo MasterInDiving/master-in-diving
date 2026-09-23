@@ -6,8 +6,8 @@
  * `clipboard` is the exact string copied — never formatted, never spaced.
  * `masked` is the collapsed preview shown before "reveal" is pressed.
  *
- * Deliberately absent: the crypto network name, the bank/IBAN, any e-mail.
- * They were not provided, so they are not invented and not rendered.
+ * Deliberately absent: the bank name, the IBAN. They were not provided, so
+ * they are not invented and not rendered.
  */
 
 export type PaymentMethodId = 'monobank' | 'paypal' | 'crypto';
@@ -24,6 +24,8 @@ export interface PaymentMethod {
   requiresReveal: boolean;
   /** Render a QR code of `clipboard` once the value is revealed. */
   qr: boolean;
+  /** Network name shown next to the address, e.g. "TRON (TRC20)". Not localised. */
+  network?: string;
 }
 
 export const PAYMENT_METHODS: readonly PaymentMethod[] = [
@@ -37,9 +39,9 @@ export const PAYMENT_METHODS: readonly PaymentMethod[] = [
   },
   {
     id: 'paypal',
-    masked: '+380 98 ••• •• 85',
-    display: '+380 98 339 10 85',
-    clipboard: '+380983391085',
+    masked: 'master.in.diving@gmail.com',
+    display: 'master.in.diving@gmail.com',
+    clipboard: 'master.in.diving@gmail.com',
     requiresReveal: false,
     qr: false,
   },
@@ -50,5 +52,6 @@ export const PAYMENT_METHODS: readonly PaymentMethod[] = [
     clipboard: 'TBjNL453YC4qz44ZhsBpgeVtrgLVu6ZU3t',
     requiresReveal: true,
     qr: true,
+    network: 'TRON (TRC20)',
   },
 ] as const;
