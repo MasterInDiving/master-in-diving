@@ -23,21 +23,6 @@ export function Story({ content }: { content: SiteContent }) {
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-
-          <figure className="mt-8 max-w-prose rounded-xl bg-cream px-6 py-6">
-            <span
-              aria-hidden="true"
-              className="block font-serif text-[2rem] leading-none text-khaki-soft/50"
-            >
-              &ldquo;
-            </span>
-            <blockquote className="mt-1 text-[1.0625rem] text-khaki italic sm:text-[1.125rem]">
-              {story.quote}
-            </blockquote>
-            <figcaption className="mt-3 text-small text-muted">
-              — {story.quoteAuthor}
-            </figcaption>
-          </figure>
         </div>
       </div>
     </section>

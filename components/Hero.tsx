@@ -49,12 +49,6 @@ export function Hero({ content }: { content: SiteContent }) {
             priority
             className="hero-photo-fade h-full max-h-[34rem] w-full object-cover object-[50%_28%] lg:max-h-none lg:min-h-[36rem]"
           />
-          <p
-            aria-hidden="true"
-            className="pointer-events-none absolute top-[18%] right-5 max-w-[9rem] text-right font-hand text-[1.75rem] leading-tight text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.45)] sm:right-8 sm:text-[2.125rem] lg:top-[26%]"
-          >
-            {hero.handwritten}
-          </p>
         </div>
       </div>
     </section>
