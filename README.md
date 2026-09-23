@@ -62,10 +62,17 @@ live in `content/ru.ts`, `content/uk.ts` and `content/en.ts` under
 | Method | Value |
 | --- | --- |
 | Monobank | 4441 1110 2260 7984 |
-| PayPal | +380 98 339 10 85 (phone number, copied — no PayPal link exists yet) |
-| Crypto | TBjNL453YC4qz44ZhsBpgeVtrgLVu6ZU3t |
+| PayPal | master.in.diving@gmail.com |
+| Crypto | TBjNL453YC4qz44ZhsBpgeVtrgLVu6ZU3t — network: TRON (TRC20) |
 
-The crypto network is deliberately not named anywhere, per the specification.
+The network name lives on `PaymentMethod.network` in `config/payments.ts` (not
+localised); the label in front of it ("Сеть" / "Мережа" / "Network") is
+`donate.methods.crypto.networkLabel` in each content file.
+
+A `PaymentCopy` can also carry an optional `linkUrl` + `linkLabel` — a small
+link rendered under the value, e.g. "How to send crypto via an exchange".
+Both are unset by default; set them in a content file once there is a real
+URL to point at.
 
 ---
 
@@ -98,6 +105,36 @@ export const UPDATES: readonly UpdateEntry[] = [
 All three languages are required — the type will not compile otherwise. The
 first three entries are shown; the rest appear behind "All updates".
 Change `UPDATES_VISIBLE` in the same file to show more or fewer.
+
+---
+
+## Adding a creation ("My art")
+
+Paintings live in **`content/creations.ts`**. The array ships empty; unlike
+Updates, the section and its navigation link stay visible while it is empty —
+an "empty" line is shown instead, since this was added as scaffolding ahead of
+real content.
+
+Drop the photo into `public/creations/` under any name — these are plain
+`<img>` tags, not the optimised AVIF/WebP/JPEG pipeline used for the hero and
+story photos, so no `npm run images` step is needed. Then add an entry:
+
+```ts
+export const CREATIONS: readonly CreationItem[] = [
+  {
+    id: 'painting-1',
+    photo: '/creations/painting-1.jpg',
+    alt: { ru: '…', uk: '…', en: '…' },
+    title: { ru: '…', uk: '…', en: '…' },
+    price: 1500,
+    currency: 'UAH',
+    status: 'available', // or 'sold'
+  },
+];
+```
+
+All three languages are required. An `available` piece shows a "write about
+this piece" link to Instagram; a `sold` one does not.
 
 ---
 
@@ -232,8 +269,7 @@ provided. Rather than filling them in, they are omitted:
 - **No amounts.** No sum raised, no target, no progress bar, no percentage.
 - **No updates.** The timeline is empty and therefore hidden.
 - **No Facebook link.** Hidden until a permanent profile URL exists.
-- **No e-mail, no bank name, no IBAN.** Contact goes through Instagram.
-- **No crypto network name.** Only the address itself.
+- **No bank name, no IBAN.** Contact for anything else goes through Instagram.
 - **No donor counts, no testimonials, no medical details.**
 
 Some of these appear in the design mockup — they were illustrative, and are not
@@ -250,7 +286,7 @@ components/         one file per section, plus the interactive pieces
 config/payments.ts  payment details — the single source of truth
 config/site.ts      locales, social links, canonical origin
 config/photos.ts    what the image script produced
-content/            all copy: ru.ts, uk.ts, en.ts, updates.ts
+content/            all copy: ru.ts, uk.ts, en.ts, updates.ts, creations.ts
 proxy.ts            language negotiation for "/"
 scripts/            image and QR generation
 source-photos/      original photographs
