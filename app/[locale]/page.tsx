@@ -1,6 +1,7 @@
 import type { Locale } from '@/config/site';
 import { getContent } from '@/content';
 import { UPDATES } from '@/content/updates';
+import { Creations } from '@/components/Creations';
 import { Donate } from '@/components/Donate';
 import { Faq } from '@/components/Faq';
 import { Footer } from '@/components/Footer';
@@ -30,6 +31,7 @@ export default async function HomePage({
         <GoalBanner content={content} />
         <SupportUses content={content} />
         <Story content={content} />
+        <Creations content={content} locale={locale} />
         <Donate content={content} />
         <Updates content={content} locale={locale} />
         <Faq content={content} />
