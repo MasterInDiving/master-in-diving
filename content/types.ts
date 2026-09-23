@@ -54,7 +54,6 @@ export interface SiteContent {
     paragraphs: string[];
     cta: string;
     storyLink: string;
-    handwritten: string;
   };
   goal: {
     label: string;
@@ -69,8 +68,6 @@ export interface SiteContent {
   story: {
     title: string;
     paragraphs: string[];
-    quote: string;
-    quoteAuthor: string;
   };
   donate: {
     title: string;
