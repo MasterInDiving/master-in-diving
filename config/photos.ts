@@ -17,8 +17,8 @@ export interface Photo {
 export const HERO_PHOTO: Photo = {
   name: 'hero',
   widths: [546, 760, 1092],
-  width: 1092,
-  height: 1236,
+  width: 960,
+  height: 1280,
 };
 
 export const STORY_PHOTO: Photo = {
