@@ -84,6 +84,8 @@ export const en: SiteContent = {
     unitCm: 'cm',
     viewLabel: 'Open enlarged image',
     closeLabel: 'Close',
+    statusSold: 'Sold',
+    buyCta: 'Buy',
   },
   donate: {
     title: 'How to support',
@@ -112,8 +114,6 @@ export const en: SiteContent = {
         copyFallback: 'Select the address and copy it manually',
       },
     },
-    contactText: 'Have a question, or want to help another way?',
-    contactCta: 'Message Kostya',
   },
   updates: {
     title: 'Latest updates',

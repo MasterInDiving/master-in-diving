@@ -84,6 +84,8 @@ export const ru: SiteContent = {
     unitCm: 'см',
     viewLabel: 'Открыть увеличенное изображение',
     closeLabel: 'Закрыть',
+    statusSold: 'Продано',
+    buyCta: 'Купить',
   },
   donate: {
     title: 'Как поддержать',
@@ -112,8 +114,6 @@ export const ru: SiteContent = {
         copyFallback: 'Выделите адрес и скопируйте вручную',
       },
     },
-    contactText: 'Есть вопрос или хотите помочь другим способом?',
-    contactCta: 'Написать Косте',
   },
   updates: {
     title: 'Последние обновления',

@@ -84,6 +84,8 @@ export const uk: SiteContent = {
     unitCm: 'см',
     viewLabel: 'Відкрити збільшене зображення',
     closeLabel: 'Закрити',
+    statusSold: 'Продано',
+    buyCta: 'Купити',
   },
   donate: {
     title: 'Як підтримати',
@@ -112,8 +114,6 @@ export const uk: SiteContent = {
         copyFallback: 'Виділіть адресу і скопіюйте вручну',
       },
     },
-    contactText: 'Є запитання або хочете допомогти іншим способом?',
-    contactCta: 'Написати Кості',
   },
   updates: {
     title: 'Останні оновлення',

@@ -44,6 +44,10 @@ export interface CreationItem {
    * invented. The unit word ("см" / "cm") comes from creations.unitCm.
    */
   sizeCm?: string;
+  /** Sale status, as given by Kostya. */
+  status: 'available' | 'sold';
+  /** Price in USD, only ever set for status: 'available'. */
+  priceUsd?: number;
 }
 
 export interface SiteContent {
@@ -103,13 +107,15 @@ export interface SiteContent {
     /** Label for the button that opens the lightbox / the lightbox close button. */
     viewLabel: string;
     closeLabel: string;
+    /** Shown instead of the price for status: 'sold'. */
+    statusSold: string;
+    /** Link to #contact, shown next to the price for status: 'available'. */
+    buyCta: string;
   };
   donate: {
     title: string;
     subtitle: string;
     methods: Record<PaymentMethodId, PaymentCopy>;
-    contactText: string;
-    contactCta: string;
   };
   updates: {
     title: string;
