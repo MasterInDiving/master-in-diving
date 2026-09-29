@@ -30,6 +30,32 @@ then their browser languages, then falls back to Russian, and redirects to
 
 ---
 
+## Language choice
+
+`components/LanguageGate.tsx` shows a blocking "choose your language" modal
+the first time a visitor arrives with no language cookie set. Picking one
+writes the same `NEXT_LOCALE` cookie the header's language switcher already
+uses (`config/site.ts` `LOCALE_COOKIE`) — there's no separate localStorage —
+so a later visit to `/` redirects straight to that language (see `proxy.ts`),
+and the modal never shows again. The header switcher still works normally at
+any time and updates the same cookie.
+
+The modal's own text is hardcoded in three languages at once in
+`LanguageGate.tsx` (it has to be — no locale is known yet), unlike everything
+else on the page, which comes from `content/<lang>.ts`.
+
+## Collapsible sections
+
+Most sections are wrapped in `components/CollapsibleSection.tsx` — a full-
+width heading button with a chevron, several of which can be open at once.
+Support (`components/Donate.tsx`) and FAQ (`components/Faq.tsx`) are the
+exceptions and stay fully visible, though each FAQ question is still its own
+small accordion. "About me" (`components/Story.tsx`) defaults open, since it
+and the hero photo are meant to be the page's emotional centre; Creations and
+Updates default closed.
+
+---
+
 ## Changing the payment details
 
 Everything lives in **`config/payments.ts`**. Change a value there and it updates
@@ -110,31 +136,51 @@ Change `UPDATES_VISIBLE` in the same file to show more or fewer.
 
 ## Adding a creation ("My art")
 
-Paintings live in **`content/creations.ts`**. The array ships empty; unlike
-Updates, the section and its navigation link stay visible while it is empty —
-an "empty" line is shown instead, since this was added as scaffolding ahead of
-real content.
+Paintings live in **`content/creations.ts`**, shown as a gallery grid with a
+lightbox. Unlike Updates, the section and its nav link stay visible while the
+array is empty — an "empty" line is shown instead, since this started as
+scaffolding ahead of real photos.
 
-Drop the photo into `public/creations/` under any name — these are plain
-`<img>` tags, not the optimised AVIF/WebP/JPEG pipeline used for the hero and
-story photos, so no `npm run images` step is needed. Then add an entry:
+Each entry goes through the same responsive AVIF/WebP/JPEG pipeline as the
+hero and story photos, just with a dynamic file list instead of a hand-picked
+one. Drop the original into `source-photos/creations/` (any name — it becomes
+the `id`) and run:
+
+```bash
+npm run images
+```
+
+It prints each photo's width/height/aspect and which of the three
+breakpoints (480 / 900 / 1400px) actually got generated — a photo already
+narrower than a breakpoint just skips it. Copy those numbers into a new
+entry:
 
 ```ts
 export const CREATIONS: readonly CreationItem[] = [
   {
-    id: 'painting-1',
-    photo: '/creations/painting-1.jpg',
+    id: 'painting-1',            // public/creations/painting-1-480.avif, etc.
+    widths: [480, 900, 1400],    // from the npm run images output
+    width: 1500,                 // ditto — the source photo's own size
+    height: 1800,
     alt: { ru: '…', uk: '…', en: '…' },
-    title: { ru: '…', uk: '…', en: '…' },
-    price: 1500,
-    currency: 'UAH',
-    status: 'available', // or 'sold'
+    sizeCm: '40 × 50',           // omit entirely if the size isn't known
   },
 ];
 ```
 
-All three languages are required. An `available` piece shows a "write about
-this piece" link to Instagram; a `sold` one does not.
+`sizeCm` is plain text, shown with the localised unit word
+(`creations.unitCm`, "см" / "cm") appended under the thumbnail and in the
+lightbox. There is deliberately no price or sold/available field — none was
+ever provided, and the spec forbids inventing one; add those to
+`content/types.ts` (`CreationItem`) and the two components
+(`components/Creations.tsx`, `components/Lightbox.tsx`) if that information
+becomes available later.
+
+A photo with a size caption baked into the photo itself (rather than the
+painting) should have that cropped off *before* it goes into
+`source-photos/creations/` — see the git history for how the first batch was
+cleaned up with `sharp` crops that only touched the surrounding wall/backdrop,
+never the artwork.
 
 ---
 
@@ -216,13 +262,17 @@ Nothing else on the site depends on a network call, at build time or after.
 
 ```ts
 export const SOCIAL = {
+  telegram: 'https://t.me/masterindiving',
+  tiktok: 'https://www.tiktok.com/@master.in.diving',
   instagram: 'https://www.instagram.com/master_in_diving',
   facebook: 'https://www.facebook.com/kostya.lebedev.7',
 };
 ```
 
-Both icons appear in the footer. Setting either to `null` removes that icon
-everywhere, with no gap left behind.
+All four appear as buttons in the "Contact Kostya" section
+(`components/Contact.tsx`), and Instagram/Facebook also in the footer.
+Setting `facebook` to `null` removes that one icon everywhere, with no gap
+left behind — Telegram, TikTok and Instagram are always shown.
 
 Use permanent profile URLs only. A `facebook.com/share/…` link is a tracking
 redirect, not an address: it carries a session-specific id and query
@@ -280,14 +330,16 @@ reproduced.
 ## Project layout
 
 ```
-app/[locale]/       page, layout, per-language metadata
-app/globals.css     design tokens (colours, type scale, spacing)
-components/         one file per section, plus the interactive pieces
-config/payments.ts  payment details — the single source of truth
-config/site.ts      locales, social links, canonical origin
-config/photos.ts    what the image script produced
-content/            all copy: ru.ts, uk.ts, en.ts, updates.ts, creations.ts
-proxy.ts            language negotiation for "/"
-scripts/            image and QR generation
-source-photos/      original photographs
+app/[locale]/            page, layout, per-language metadata
+app/globals.css          design tokens (colours, type scale, spacing)
+components/              one file per section, plus the interactive pieces
+config/payments.ts       payment details — the single source of truth
+config/site.ts           locales, social links, canonical origin
+config/photos.ts         what the image script produced (hero/story)
+content/                 all copy: ru.ts, uk.ts, en.ts, updates.ts, creations.ts
+proxy.ts                 language negotiation for "/"
+scripts/                 image and QR generation
+source-photos/           original photographs
+source-photos/creations/ original paintings, one file per gallery entry
+public/creations/        generated gallery images — see npm run images
 ```
