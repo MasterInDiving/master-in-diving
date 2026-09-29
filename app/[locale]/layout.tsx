@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { LOCALES, OG_LOCALE, SITE_URL, isLocale, type Locale } from '@/config/site';
 import { OG_IMAGE } from '@/config/photos';
 import { getContent } from '@/content';
+import { LanguageGate } from '@/components/LanguageGate';
 import '../globals.css';
 
 // Only latin and cyrillic: latin-ext is unused by all three languages, and
@@ -102,6 +103,7 @@ export default async function LocaleLayout({
         >
           {content.a11y.skipToContent}
         </a>
+        <LanguageGate locale={locale as Locale} />
         {children}
       </body>
     </html>
