@@ -1,12 +1,18 @@
+'use client';
+
+import { useState } from 'react';
 import type { Locale } from '@/config/site';
-import { SOCIAL } from '@/config/site';
 import { CREATIONS } from '@/content/creations';
 import type { SiteContent } from '@/content/types';
-import { ExternalLinkIcon } from './icons';
+import { CollapsibleSection } from './CollapsibleSection';
+import { Lightbox } from './Lightbox';
+import { ResponsivePhoto } from './Photo';
+import { ZoomIcon } from './icons';
 
 /**
- * Shows an "empty" line instead of the grid while content/creations.ts is
- * empty — unlike Updates, the section and its nav link stay visible.
+ * Closed by default (unlike Story/Updates) — this is scaffolding ahead of
+ * more paintings, per the brief. An "empty" line is shown instead of the
+ * grid while CREATIONS is empty; the section stays visible either way.
  */
 export function Creations({
   content,
@@ -16,61 +22,61 @@ export function Creations({
   locale: Locale;
 }) {
   const { creations } = content;
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="creations" className="container-page pt-14 lg:pt-24">
-      <h2 className="text-h2 font-semibold">{creations.title}</h2>
-
+    <CollapsibleSection id="creations" title={creations.title} defaultOpen={false}>
       {CREATIONS.length === 0 ? (
-        <p className="mt-4 max-w-prose text-muted">{creations.empty}</p>
+        <p className="max-w-prose text-muted">{creations.empty}</p>
       ) : (
-        <ul className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {CREATIONS.map((item) => (
-            <li
-              key={item.id}
-              className="flex flex-col overflow-hidden rounded-xl border border-line"
-            >
-              <img
-                src={item.photo}
-                alt={item.alt[locale]}
-                loading="lazy"
-                className="aspect-[4/5] w-full object-cover"
-              />
-
-              <div className="flex flex-1 flex-col px-5 py-5">
-                <h3 className="text-h3 font-semibold">{item.title[locale]}</h3>
-                <p className="mt-1 text-muted">
-                  {item.price} {item.currency}
-                </p>
-
+        <ul className="grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
+          {CREATIONS.map((item, index) => (
+            <li key={item.id}>
+              <button
+                type="button"
+                onClick={() => setOpenIndex(index)}
+                aria-label={creations.viewLabel}
+                className="group relative block w-full overflow-hidden rounded-lg border border-line"
+              >
+                <ResponsivePhoto
+                  photo={{
+                    name: item.id,
+                    widths: item.widths,
+                    width: item.width,
+                    height: item.height,
+                  }}
+                  alt={item.alt[locale]}
+                  sizes="(min-width: 1024px) 23vw, (min-width: 640px) 31vw, 46vw"
+                  basePath="/creations"
+                  className="aspect-[4/5] w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
                 <span
-                  className={
-                    item.status === 'sold'
-                      ? 'mt-2 inline-flex w-fit rounded-full bg-cream px-3 py-1 text-small text-muted'
-                      : 'mt-2 inline-flex w-fit rounded-full border border-khaki px-3 py-1 text-small text-khaki'
-                  }
+                  aria-hidden="true"
+                  className="absolute inset-0 flex items-center justify-center bg-ink/0 text-white opacity-0 transition-all duration-200 group-hover:bg-ink/25 group-hover:opacity-100"
                 >
-                  {item.status === 'sold'
-                    ? creations.soldLabel
-                    : creations.availableLabel}
+                  <ZoomIcon className="size-7" />
                 </span>
+              </button>
 
-                {item.status === 'available' && (
-                  <a
-                    href={SOCIAL.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group mt-auto inline-flex w-fit items-center gap-2 pt-4 text-khaki underline decoration-line underline-offset-[6px] transition-colors duration-200 hover:decoration-khaki"
-                  >
-                    {creations.contactCta}
-                    <ExternalLinkIcon className="size-4" />
-                  </a>
-                )}
-              </div>
+              {item.sizeCm && (
+                <p className="mt-2 text-small text-muted">
+                  {item.sizeCm} {creations.unitCm}
+                </p>
+              )}
             </li>
           ))}
         </ul>
       )}
-    </section>
+
+      {openIndex !== null && (
+        <Lightbox
+          item={CREATIONS[openIndex]}
+          locale={locale}
+          unitCm={creations.unitCm}
+          closeLabel={creations.closeLabel}
+          onClose={() => setOpenIndex(null)}
+        />
+      )}
+    </CollapsibleSection>
   );
 }

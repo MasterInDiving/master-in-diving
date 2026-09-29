@@ -140,6 +140,33 @@ export const CoinIcon = (props: IconProps) => (
   </Icon>
 );
 
+export const ChevronDownIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M5 8.5 12 15.5 19 8.5" />
+  </Icon>
+);
+
+export const TelegramIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="m3.4 12.4 16.3-7.9c.8-.4 1.6.3 1.3 1.1l-3 14.2c-.2 1-1.4 1.4-2.2.7l-4-3.3-2.3 2.2c-.6.6-1.6.2-1.6-.6l.2-4 9.4-8.9c.3-.3-.1-.8-.4-.5L6 12.2l-3-1c-.9-.3-.9-1.5.4-1.8Z" />
+  </Icon>
+);
+
+export const TikTokIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M13.2 3v10.8a3 3 0 1 1-2.4-2.94" />
+    <path d="M13.2 3a5 5 0 0 0 4.9 5" />
+  </Icon>
+);
+
+export const ZoomIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <circle cx="10.6" cy="10.6" r="6.6" />
+    <path d="M15.4 15.4 20 20" />
+    <path d="M10.6 8v5.2M8 10.6h5.2" />
+  </Icon>
+);
+
 export const ExternalLinkIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M13.4 4.6H19.4v6" />

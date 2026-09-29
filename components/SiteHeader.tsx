@@ -19,6 +19,7 @@ export function SiteHeader({ locale, content, hasUpdates }: SiteHeaderProps) {
     { id: 'creations', label: content.nav.creations },
     { id: 'support', label: content.nav.support },
     ...(hasUpdates ? [{ id: 'updates', label: content.nav.updates }] : []),
+    { id: 'contact', label: content.nav.contact },
     { id: 'faq', label: content.nav.faq },
   ];
 

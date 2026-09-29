@@ -1,15 +1,18 @@
 import { STORY_PHOTO } from '@/config/photos';
 import type { SiteContent } from '@/content/types';
+import { CollapsibleSection } from './CollapsibleSection';
 import { ResponsivePhoto } from './Photo';
 
+/**
+ * Open by default — this and the hero photo are the page's emotional
+ * centre — but still collapsible like the other content sections.
+ */
 export function Story({ content }: { content: SiteContent }) {
   const { story } = content;
 
   return (
-    <section id="story" className="container-page pt-14 lg:pt-24">
-      <h2 className="text-h2 font-semibold">{story.title}</h2>
-
-      <div className="mt-7 grid gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-12">
+    <CollapsibleSection id="story" title={story.title} defaultOpen>
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-12">
         <ResponsivePhoto
           photo={STORY_PHOTO}
           alt={content.a11y.storyPhotoAlt}
@@ -25,6 +28,6 @@ export function Story({ content }: { content: SiteContent }) {
           </div>
         </div>
       </div>
-    </section>
+    </CollapsibleSection>
   );
 }

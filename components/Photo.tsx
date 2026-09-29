@@ -13,6 +13,8 @@ interface PhotoProps {
    */
   formats?: ('avif' | 'webp')[];
   className?: string;
+  /** Directory the files live under. Defaults to "/photos" (hero/story/OG). */
+  basePath?: string;
 }
 
 /**
@@ -27,9 +29,10 @@ export function ResponsivePhoto({
   priority = false,
   formats = ['avif', 'webp'],
   className,
+  basePath = '/photos',
 }: PhotoProps) {
   const srcSet = (ext: string) =>
-    photo.widths.map((w) => `/photos/${photo.name}-${w}.${ext} ${w}w`).join(', ');
+    photo.widths.map((w) => `${basePath}/${photo.name}-${w}.${ext} ${w}w`).join(', ');
 
   const fallbackWidth = photo.widths[photo.widths.length - 1];
 
@@ -44,7 +47,7 @@ export function ResponsivePhoto({
         />
       ))}
       <img
-        src={`/photos/${photo.name}-${fallbackWidth}.jpg`}
+        src={`${basePath}/${photo.name}-${fallbackWidth}.jpg`}
         srcSet={srcSet('jpg')}
         sizes={sizes}
         alt={alt}

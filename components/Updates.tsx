@@ -5,6 +5,7 @@ import type { Locale } from '@/config/site';
 import { formatUpdateDate } from '@/content';
 import type { SiteContent } from '@/content/types';
 import { UPDATES, UPDATES_VISIBLE } from '@/content/updates';
+import { CollapsibleSection } from './CollapsibleSection';
 import { ArrowRightIcon } from './icons';
 
 /**
@@ -25,10 +26,8 @@ export function Updates({
   const shown = expanded ? UPDATES : UPDATES.slice(0, UPDATES_VISIBLE);
 
   return (
-    <section id="updates" className="container-page pt-14 lg:pt-24">
-      <h2 className="text-h2 font-semibold">{content.updates.title}</h2>
-
-      <ol className="mt-7 max-w-prose">
+    <CollapsibleSection id="updates" title={content.updates.title} defaultOpen={false}>
+      <ol className="max-w-prose">
         {shown.map((entry) => (
           <li
             key={`${entry.date}-${entry.title[locale]}`}
@@ -60,6 +59,6 @@ export function Updates({
           <ArrowRightIcon className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" />
         </button>
       )}
-    </section>
+    </CollapsibleSection>
   );
 }
