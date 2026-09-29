@@ -90,6 +90,14 @@
     border-radius: 2px;
   }
 
+  /* Toggled by useModalOpen() while Lightbox or LanguageGate is open. The
+     sticky header still painted above a higher-z-index, top:0 fixed modal
+     in testing, so it's hidden outright rather than relied on to lose a
+     z-index fight. */
+  html.modal-open header {
+    visibility: hidden;
+  }
+
   /* Section 37: honour the reader's motion preference. */
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -172,6 +180,31 @@
   }
 
   .faq-answer[data-open='true'] > div {
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  /* Same technique as .faq-answer, generalised for whole-section accordions
+     (Story, Creations, Updates): height animates from measured content size,
+     no JavaScript measurement, and collapsed content is unreachable to
+     assistive tech and find-in-page rather than merely clipped. */
+  .accordion-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 280ms ease;
+  }
+
+  .accordion-panel[data-open='true'] {
+    grid-template-rows: 1fr;
+  }
+
+  .accordion-panel > div {
+    overflow: hidden;
+    visibility: hidden;
+    transition: visibility 0s linear 280ms;
+  }
+
+  .accordion-panel[data-open='true'] > div {
     visibility: visible;
     transition-delay: 0s;
   }
