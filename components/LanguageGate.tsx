@@ -20,24 +20,19 @@ const OPTIONS: { locale: Locale; label: string }[] = [
   { locale: 'en', label: 'English' },
 ];
 
-function hasStoredLocale(): boolean {
-  return document.cookie
-    .split(';')
-    .some((part) => part.trim().startsWith(`${LOCALE_COOKIE}=`));
-}
-
 /**
- * Blocks the page with a language choice on a visitor's very first load.
- * Reuses the same cookie the header's LanguageSwitcher already writes
- * (config/site.ts LOCALE_COOKIE), so a choice made here is exactly what a
- * later visit to "/" redirects to (see proxy.ts) — no separate storage.
+ * Blocks the page with a language choice on every load, by request — a
+ * returning visitor re-confirms their language each time rather than only
+ * on their first visit. The choice still writes LOCALE_COOKIE (config/site.ts),
+ * which is what a later visit to bare "/" redirects to (see proxy.ts) and
+ * what the header's LanguageSwitcher reads.
  */
 export function LanguageGate({ locale }: { locale: Locale }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    if (!hasStoredLocale()) setOpen(true);
+    setOpen(true);
   }, []);
 
   useModalOpen(open);
