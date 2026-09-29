@@ -10,7 +10,7 @@
  * and the site stays portable to hosts without an image pipeline.
  */
 
-import { mkdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, rm, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -21,6 +21,10 @@ import { PAYMENT_METHODS } from '../config/payments.ts';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'source-photos');
 const OUT = path.join(ROOT, 'public', 'photos');
+const CREATIONS_SRC = path.join(SRC, 'creations');
+const CREATIONS_OUT = path.join(ROOT, 'public', 'creations');
+/** Thumbnail, tablet/2x, and lightbox-full breakpoints for the gallery. */
+const CREATIONS_WIDTHS = [480, 900, 1400];
 
 /**
  * `trim` removes the Instagram overlays baked into the screenshots: the
@@ -113,8 +117,55 @@ async function build() {
   }
 
   await buildQrCodes();
+  const creationsManifest = await buildCreations();
 
   console.log(JSON.stringify(manifest, null, 2));
+  console.log('creations:', JSON.stringify(creationsManifest, null, 2));
+}
+
+/**
+ * Every file in source-photos/creations/ becomes a responsive AVIF/WebP/JPEG
+ * set in public/creations/, named after the source file's stem. Unlike hero
+ * and story this list isn't hand-maintained — drop a file in and re-run.
+ * Prints each entry's intrinsic width/height so they can be copied into
+ * content/creations.ts (CreationItem.width / .height), the same way
+ * HERO_PHOTO / STORY_PHOTO are hand-maintained in config/photos.ts.
+ */
+async function buildCreations() {
+  await rm(CREATIONS_OUT, { recursive: true, force: true });
+  await mkdir(CREATIONS_OUT, { recursive: true });
+
+  if (!existsSync(CREATIONS_SRC)) return {};
+
+  const files = (await readdir(CREATIONS_SRC)).filter((f) =>
+    /\.(jpe?g|png|webp)$/i.test(f),
+  );
+
+  const manifest = {};
+  for (const file of files) {
+    const id = file.replace(/\.[^.]+$/, '');
+    const input = path.join(CREATIONS_SRC, file);
+    const rotated = sharp(input).rotate();
+    const meta = await rotated.metadata();
+    const width = meta.width;
+    const height = meta.height;
+
+    const widths = CREATIONS_WIDTHS.filter((w) => w <= width * 1.25);
+    const buffer = await rotated.toBuffer();
+    for (const w of widths) {
+      for (const format of FORMATS) {
+        const file = `${id}-${w}.${format.ext}`;
+        await format
+          .apply(sharp(buffer).resize({ width: w }))
+          .toFile(path.join(CREATIONS_OUT, file));
+      }
+    }
+
+    manifest[id] = { widths, width, height, aspect: +(width / height).toFixed(4) };
+    console.log(`creations/${id}: ${width}x${height} -> ${widths.join(', ')}`);
+  }
+
+  return manifest;
 }
 
 /**
