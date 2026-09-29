@@ -58,10 +58,23 @@ export function Creations({
                 </span>
               </button>
 
-              {item.sizeCm && (
-                <p className="mt-2 text-small text-muted">
-                  {item.sizeCm} {creations.unitCm}
-                </p>
+              <p className="mt-2 text-small text-muted">
+                {item.sizeCm && (
+                  <>
+                    {item.sizeCm} {creations.unitCm}
+                    {(item.priceUsd || item.status === 'sold') && ' · '}
+                  </>
+                )}
+                {item.status === 'sold' ? creations.statusSold : item.priceUsd ? `$${item.priceUsd}` : null}
+              </p>
+
+              {item.status === 'available' && (
+                <a
+                  href="#contact"
+                  className="mt-1 inline-block text-small text-khaki underline decoration-line underline-offset-4 transition-colors duration-200 hover:decoration-khaki"
+                >
+                  {creations.buyCta}
+                </a>
               )}
             </li>
           ))}
@@ -74,6 +87,8 @@ export function Creations({
           locale={locale}
           unitCm={creations.unitCm}
           closeLabel={creations.closeLabel}
+          statusSold={creations.statusSold}
+          buyCta={creations.buyCta}
           onClose={() => setOpenIndex(null)}
         />
       )}

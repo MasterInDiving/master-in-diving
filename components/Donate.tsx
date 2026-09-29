@@ -1,8 +1,7 @@
 import { PAYMENT_METHODS, type PaymentMethodId } from '@/config/payments';
-import { SOCIAL } from '@/config/site';
 import type { SiteContent } from '@/content/types';
 import { PaymentCard } from './PaymentCard';
-import { CardIcon, CoinIcon, ExternalLinkIcon, MailIcon } from './icons';
+import { CardIcon, CoinIcon, MailIcon } from './icons';
 
 const ICONS: Record<PaymentMethodId, React.ReactNode> = {
   monobank: <CardIcon className="size-5" />,
@@ -29,20 +28,6 @@ export function Donate({ content }: { content: SiteContent }) {
           />
         ))}
       </ul>
-
-      {/* Contact is a separate line, not a fourth payment method (section 24). */}
-      <div className="mt-8 flex flex-col gap-x-6 gap-y-2 sm:flex-row sm:items-center">
-        <p className="text-muted">{donate.contactText}</p>
-        <a
-          href={SOCIAL.instagram}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-flex min-h-12 items-center gap-2 self-start text-khaki underline decoration-line underline-offset-[6px] transition-colors duration-200 hover:decoration-khaki sm:self-auto"
-        >
-          {donate.contactCta}
-          <ExternalLinkIcon className="size-4" />
-        </a>
-      </div>
     </section>
   );
 }

@@ -13,11 +13,13 @@ interface LightboxProps {
   locale: Locale;
   unitCm: string;
   closeLabel: string;
+  statusSold: string;
+  buyCta: string;
   onClose: () => void;
 }
 
 /** Full-size view of a gallery photo. Escape or the backdrop closes it. */
-export function Lightbox({ item, locale, unitCm, closeLabel, onClose }: LightboxProps) {
+export function Lightbox({ item, locale, unitCm, closeLabel, statusSold, buyCta, onClose }: LightboxProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useModalOpen(true);
@@ -66,10 +68,24 @@ export function Lightbox({ item, locale, unitCm, closeLabel, onClose }: Lightbox
           basePath="/creations"
           className="max-h-[80vh] w-auto max-w-full rounded-md object-contain"
         />
-        {item.sizeCm && (
-          <p className="mt-3 text-small text-white/80">
-            {item.sizeCm} {unitCm}
-          </p>
+        <p className="mt-3 text-small text-white/80">
+          {item.sizeCm && (
+            <>
+              {item.sizeCm} {unitCm}
+              {(item.priceUsd || item.status === 'sold') && ' · '}
+            </>
+          )}
+          {item.status === 'sold' ? statusSold : item.priceUsd ? `$${item.priceUsd}` : null}
+        </p>
+
+        {item.status === 'available' && (
+          <a
+            href="#contact"
+            onClick={onClose}
+            className="mt-2 inline-block text-small text-white underline decoration-white/50 underline-offset-4 transition-colors duration-200 hover:decoration-white"
+          >
+            {buyCta}
+          </a>
         )}
       </div>
     </div>,
