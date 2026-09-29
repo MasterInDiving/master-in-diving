@@ -24,6 +24,7 @@ export const ru: SiteContent = {
     creations: 'Творчество',
     support: 'Поддержать',
     updates: 'Обновления',
+    contact: 'Контакты',
     faq: 'FAQ',
   },
   hero: {
@@ -79,10 +80,10 @@ export const ru: SiteContent = {
   },
   creations: {
     title: 'Моё творчество',
-    empty: 'Здесь скоро появятся мои картины — фото, цена и статус.',
-    soldLabel: 'Продано',
-    availableLabel: 'Не продано',
-    contactCta: 'Написать по поводу картины',
+    empty: 'Здесь скоро появятся мои картины.',
+    unitCm: 'см',
+    viewLabel: 'Открыть увеличенное изображение',
+    closeLabel: 'Закрыть',
   },
   donate: {
     title: 'Как поддержать',
@@ -117,6 +118,13 @@ export const ru: SiteContent = {
   updates: {
     title: 'Последние обновления',
     showAll: 'Все обновления',
+  },
+  contact: {
+    title: 'Связаться с Костей',
+    telegramLabel: 'Telegram Кости',
+    tiktokLabel: 'TikTok Кости',
+    instagramLabel: 'Instagram Кости',
+    facebookLabel: 'Facebook Кости',
   },
   faq: {
     title: 'Часто задаваемые вопросы',

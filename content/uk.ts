@@ -24,6 +24,7 @@ export const uk: SiteContent = {
     creations: 'Творчість',
     support: 'Підтримати',
     updates: 'Оновлення',
+    contact: 'Контакти',
     faq: 'FAQ',
   },
   hero: {
@@ -79,10 +80,10 @@ export const uk: SiteContent = {
   },
   creations: {
     title: 'Моя творчість',
-    empty: 'Тут незабаром з’являться мої картини — фото, ціна і статус.',
-    soldLabel: 'Продано',
-    availableLabel: 'Не продано',
-    contactCta: 'Написати щодо картини',
+    empty: 'Тут незабаром з’являться мої картини.',
+    unitCm: 'см',
+    viewLabel: 'Відкрити збільшене зображення',
+    closeLabel: 'Закрити',
   },
   donate: {
     title: 'Як підтримати',
@@ -117,6 +118,13 @@ export const uk: SiteContent = {
   updates: {
     title: 'Останні оновлення',
     showAll: 'Усі оновлення',
+  },
+  contact: {
+    title: 'Зв’язатися з Костею',
+    telegramLabel: 'Telegram Кості',
+    tiktokLabel: 'TikTok Кості',
+    instagramLabel: 'Instagram Кості',
+    facebookLabel: 'Facebook Кості',
   },
   faq: {
     title: 'Часті запитання',

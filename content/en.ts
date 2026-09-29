@@ -24,6 +24,7 @@ export const en: SiteContent = {
     creations: 'Art',
     support: 'Support',
     updates: 'Updates',
+    contact: 'Contact',
     faq: 'FAQ',
   },
   hero: {
@@ -79,10 +80,10 @@ export const en: SiteContent = {
   },
   creations: {
     title: 'My art',
-    empty: 'Paintings will appear here soon — photo, price and status.',
-    soldLabel: 'Sold',
-    availableLabel: 'Available',
-    contactCta: 'Ask about this piece',
+    empty: 'Paintings will appear here soon.',
+    unitCm: 'cm',
+    viewLabel: 'Open enlarged image',
+    closeLabel: 'Close',
   },
   donate: {
     title: 'How to support',
@@ -117,6 +118,13 @@ export const en: SiteContent = {
   updates: {
     title: 'Latest updates',
     showAll: 'All updates',
+  },
+  contact: {
+    title: 'Contact Kostya',
+    telegramLabel: 'Kostya on Telegram',
+    tiktokLabel: 'Kostya on TikTok',
+    instagramLabel: 'Kostya on Instagram',
+    facebookLabel: 'Kostya on Facebook',
   },
   faq: {
     title: 'Frequently asked questions',

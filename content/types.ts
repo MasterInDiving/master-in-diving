@@ -30,15 +30,20 @@ export interface PaymentCopy {
 }
 
 export interface CreationItem {
-  /** Stable key; also used to derive nothing else — free-form. */
+  /** File stem in public/creations/, e.g. "sunglasses-girl" -> sunglasses-girl-480.avif. */
   id: string;
-  /** Path under public/, e.g. "/creations/painting-1.jpg". No build step needed. */
-  photo: string;
+  /** Rendered widths that actually exist for this id (see npm run images output). */
+  widths: number[];
+  /** Intrinsic size of the source photo, for the <img> width/height (no CLS). */
+  width: number;
+  height: number;
   alt: Record<Locale, string>;
-  title: Record<Locale, string>;
-  price: number;
-  currency: string;
-  status: 'available' | 'sold';
+  /**
+   * Physical size read off the original photo, e.g. "40 × 50" or, for a
+   * diptych, "2 × 40 × 40". Omitted when the photo carried no size — never
+   * invented. The unit word ("см" / "cm") comes from creations.unitCm.
+   */
+  sizeCm?: string;
 }
 
 export interface SiteContent {
@@ -63,6 +68,7 @@ export interface SiteContent {
     creations: string;
     support: string;
     updates: string;
+    contact: string;
     faq: string;
   };
   hero: {
@@ -92,10 +98,11 @@ export interface SiteContent {
     title: string;
     /** Shown instead of the grid while CREATIONS in content/creations.ts is empty. */
     empty: string;
-    soldLabel: string;
-    availableLabel: string;
-    /** Link label under an available piece, e.g. "Ask about this piece". */
-    contactCta: string;
+    /** Unit word appended after CreationItem.sizeCm, e.g. "см" / "cm". */
+    unitCm: string;
+    /** Label for the button that opens the lightbox / the lightbox close button. */
+    viewLabel: string;
+    closeLabel: string;
   };
   donate: {
     title: string;
@@ -107,6 +114,13 @@ export interface SiteContent {
   updates: {
     title: string;
     showAll: string;
+  };
+  contact: {
+    title: string;
+    telegramLabel: string;
+    tiktokLabel: string;
+    instagramLabel: string;
+    facebookLabel: string;
   };
   faq: {
     title: string;
