@@ -175,10 +175,6 @@ export const en: SiteContent = {
         a: 'Of course. You can share this page or one of my videos. Sometimes a single repost helps just as much.',
       },
       {
-        q: 'Can I share your posts?',
-        a: 'Yes. Especially the videos about injuries from jumping into water. If even one person watches them and decides not to test a river’s depth with their head, then filming all of it was worth it.',
-      },
-      {
         q: 'Can I message you personally?',
         a: 'Yes. Just don’t take it personally if I don’t reply right away. There can be many reasons, and not wanting to reply is rarely one of them. I read messages and try to answer when I can.',
       },
