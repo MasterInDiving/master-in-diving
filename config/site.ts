@@ -28,7 +28,7 @@ export const SITE_URL = (
 ).replace(/\/$/, '');
 
 export const SOCIAL = {
-  telegram: 'https://t.me/masterindiving',
+  telegram: 'https://t.me/master_in_diving',
   tiktok: 'https://www.tiktok.com/@master.in.diving?_r=1&_t=ZN-9A7tLM9nY6I',
   instagram: 'https://www.instagram.com/master_in_diving',
   /** Old username on a profile that displays as Константин Донец. */
