@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import { LOCALES, OG_LOCALE, SITE_URL, isLocale, type Locale } from '@/config/site';
 import { OG_IMAGE } from '@/config/photos';
 import { getContent } from '@/content';
@@ -105,6 +106,11 @@ export default async function LocaleLayout({
         </a>
         <LanguageGate locale={locale as Locale} />
         {children}
+        {/* Vercel Web Analytics: the script is served by Vercel itself, no package needed. */}
+        <Script id="vercel-analytics-init" strategy="afterInteractive">
+          {`window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };`}
+        </Script>
+        <Script src="/_vercel/insights/script.js" strategy="afterInteractive" defer />
       </body>
     </html>
   );
